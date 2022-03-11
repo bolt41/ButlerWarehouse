@@ -190,3 +190,16 @@ class Estimate(models.Model):
 
     def __str__(self):
         return self.object.name
+
+#Модель товаров в смете
+class ProductEstimate(models.Model):
+    product = models.ForeignKey('Product', verbose_name='Номенклатура', on_delete=models.CASCADE)
+    estimate = models.ForeignKey('Estimate', verbose_name='Смета', on_delete=models.CASCADE)
+    count = models.PositiveIntegerField('Количество')
+
+    class Meta:
+        verbose_name = 'Номенклатура'
+        verbose_name_plural = 'Номенклатуры смет'
+
+    def __str__(self):
+        return self.object.name

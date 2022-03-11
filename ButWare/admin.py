@@ -1,6 +1,5 @@
 from django.contrib import admin
-from .models import Brands, Units, GroupProduct, Product, Warehouse, Provider, Systems, StatusObject, ObjectsCurrent, StatusEstimate, Estimate
-
+from .models import Brands, Units, GroupProduct, Product, Warehouse, Provider, Systems, StatusObject, ObjectsCurrent, StatusEstimate, Estimate, ProductEstimate
 admin.site.site_header = 'Администрирование Butler'
 
 class ProviderAdmin(admin.ModelAdmin):
@@ -45,3 +44,4 @@ admin.site.register(StatusObject)
 admin.site.register(ObjectsCurrent, ObjectAdmin)
 admin.site.register(StatusEstimate)
 admin.site.register(Estimate, EstimateAdmin)
+admin.site.register(ProductEstimate)
