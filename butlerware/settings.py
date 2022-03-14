@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'butlerware',
-    'ButWare',
+
+    'ButWare.apps.ButwareConfig',
 ]
 
 MIDDLEWARE = [

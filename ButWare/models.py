@@ -203,3 +203,35 @@ class ProductEstimate(models.Model):
 
     def __str__(self):
         return self.object.name
+
+#модель приходов
+class Entrance(models.Model):
+    provider = models.ForeignKey('Provider', verbose_name='Поступление',blank=True, null=True, on_delete=models.SET_NULL)
+    entrance_prod = models.ForeignKey('Product', verbose_name='Номенклатура', on_delete=models.CASCADE)
+    count = models.IntegerField('Количество')
+    source_doc = models.CharField('Документ-основание', max_length=300, blank=True)
+    warehouse = models.ForeignKey('Warehouse', blank=True, null = True, on_delete=models.SET_NULL)
+    to_object = models.ForeignKey('ObjectsCurrent', verbose_name='Объект', blank=True, null=True, on_delete=models.SET_NULL)
+    date = models.DateField('Дата', default=date.today)
+
+    class Meta:
+        verbose_name = 'Поступление'
+        verbose_name_plural = 'Поступления'
+
+    def __str__(self):
+        return self.object.provider
+
+#модель резервов
+class Reserved(models.Model):
+    product = models.ForeignKey('Product', verbose_name='Номенклатура', on_delete=models.CASCADE)
+    count = models.IntegerField('Количество')
+    to_object = models.ForeignKey('ObjectsCurrent', verbose_name='Объект', blank=True, null=True,
+                                  on_delete=models.SET_NULL)
+    warehnouse = models.ForeignKey('Warehouse', verbose_name='Склад', blank=True, null=True, on_delete=models.SET_NULL)
+
+    class Meta:
+        verbose_name = 'Резерв'
+        verbose_name_plural = 'Резервы'
+
+    def __str__(self):
+        return self.object.to_object
