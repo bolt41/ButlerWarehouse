@@ -33,6 +33,9 @@ def add_estimate(request):
     }
     return render(request, 'estimate/add_estimate.html', context=context)
 
+@login_required
+def smeta(request):
+    return render(request, 'estimate/smeta.html', {})
 
 def page_not_found(request, exception):
     return HttpResponseNotFound('<h1>Страница не существует</h1>')
