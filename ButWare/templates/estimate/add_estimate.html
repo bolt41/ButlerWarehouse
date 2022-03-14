@@ -28,13 +28,9 @@
 
     <script>
   $( function() {
-    var availableTags = [
-        {% for language in data_tovar %}
-            "{{language.name}}",
-        {% endfor %}
-    ];
     $( "#tags" ).autocomplete({
-      source: availableTags
+      source: '{% url 'autocomplete' %}',
+      minLength: 2
     });
   } );
   </script>

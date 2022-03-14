@@ -1,9 +1,18 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
 from django.contrib.auth.decorators import login_required
 from .forms import *
 from .forms import *
 from .models import *
+
+#функция выдачи автозаполнения товаров из БД
+def autocomplete(request):
+    if 'term' in request.GET:
+        qs = Product.objects.filter(name__istartswith=request.GET.get('term'))
+        titles = list()
+        for product in qs:
+            titles.append(product.name)
+        return JsonResponse(titles, safe=False)
 
 
 @login_required
