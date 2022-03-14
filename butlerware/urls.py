@@ -16,8 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from ButWare.views import page_not_found
+
 urlpatterns = [
     path('', include('ButWare.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
 ]
+
+handler404 = page_not_found
