@@ -202,7 +202,7 @@ class ProductEstimate(models.Model):
         verbose_name_plural = 'Номенклатуры смет'
 
     def __str__(self):
-        return self.object.name
+        return self.product.name
 
 #модель приходов
 class Entrance(models.Model):
@@ -219,7 +219,7 @@ class Entrance(models.Model):
         verbose_name_plural = 'Поступления'
 
     def __str__(self):
-        return self.object.provider
+        return self.to_object.name
 
 #модель резервов
 class Reserved(models.Model):
@@ -234,4 +234,4 @@ class Reserved(models.Model):
         verbose_name_plural = 'Резервы'
 
     def __str__(self):
-        return self.object.to_object
+        return self.to_object.name

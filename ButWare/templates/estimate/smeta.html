@@ -7,7 +7,42 @@
 {% endblock %}
 {% block content %}
 <div id="finish">
-<h1>Работа со сметной докуменацей</h1>
+<h2>Работа со сметной докуменацей</h2>
+    <br>
+<div><a href="{% url 'add_estimate' %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Создать</a></div>
+    <br>
+<table width="100%" class="display" id="est_table">
+    <thead>
+    <tr>
+        <td>№</td>
+        <td>Объект</td>
+        <td>Дата</td>
+        <td>Статус</td>
+    </tr>
+    </thead>
+    <tbody>
+        {% for el in estimate %}
+        <tr>
+            <td>{{ el.id }}</td>
+            <td>{{ el.object }}</td>
+            <td>{{ el.date_doc }}</td>
+            <td>{{ el.status_doc }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+<script type="text/javascript">
+$(document).ready( function () {
+    $('#est_table').DataTable(
+    {
+        "pageLength": 10,
+    }
+    );
+} );
+</script>
+
 </div>
 
 {% endblock %}
+

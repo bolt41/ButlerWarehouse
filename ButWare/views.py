@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
 from django.contrib.auth.decorators import login_required
 from .forms import *
-from .forms import *
 from .models import *
 
 #функция выдачи автозаполнения товаров из БД
@@ -35,7 +34,11 @@ def add_estimate(request):
 
 @login_required
 def smeta(request):
-    return render(request, 'estimate/smeta.html', {})
+    all_estimate = Estimate.objects.all()
+    context = {
+        'estimate': all_estimate,
+    }
+    return render(request, 'estimate/smeta.html', context=context)
 
 def page_not_found(request, exception):
     return HttpResponseNotFound('<h1>Страница не существует</h1>')
