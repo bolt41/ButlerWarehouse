@@ -29,10 +29,11 @@
     <script>
 
         html = "";
-        var data = JSON.parse("{{ data|safe }}");
+        var data = JSON.parse ("{{data | escapejs}}");
         console.log(data);
-        for(var key in obj) {
-            html += "<option value=" + key  + ">" +obj[key] + "</option>"
+        for(var key in data) {
+            console.log(data[key].fields)
+            html += "<option value=" + data[key].name  + ">" + data[key].name + "</option>"
         }
         document.getElementById("datas").innerHTML = html;
 
