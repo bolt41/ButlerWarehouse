@@ -21,28 +21,38 @@
     </tr>
     </thead>
     <tbody>
-        {% for el in estimate %}
-        <tr>
-            <td>{{ el.id }}</td>
-            <td>{{ el.object }}</td>
-            <td>{{ el.date_doc }}</td>
-            <td>{{ el.status_doc }}</td>
-        </tr>
-        {% endfor %}
+
     </tbody>
 
 </table>
 <script type="text/javascript">
+var oTable;
 $(document).ready( function () {
-    $('#est_table').DataTable(
+    oTable = $('#est_table').DataTable(
     {
         "pageLength": 10,
+         "ajax": "/estimate_json",
+         "columns": [
+                     {"data": "id"},
+                     {"data": "object" },
+                     {"data": "date_doc" },
+                     {"data": "status_doc"},
+                 ],
     }
     );
 } );
 </script>
 
 </div>
+
+
+
+
+
+
+
+
+
 
 {% endblock %}
 

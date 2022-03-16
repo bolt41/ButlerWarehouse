@@ -3,6 +3,9 @@ from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
 from django.contrib.auth.decorators import login_required
 from .forms import *
 from .models import *
+from django.core import serializers
+import json
+from django.core.serializers.json import DjangoJSONEncoder
 
 #функция выдачи автозаполнения товаров из БД
 def autocomplete(request):
@@ -14,6 +17,14 @@ def autocomplete(request):
         return JsonResponse(titles, safe=False)
 
 
+def Estimate_asJson(request):
+    object_list = Estimate.objects.all() #or any kind of queryset
+    data = [object.get_estimate_json() for object in object_list]
+    response = {'data': data}
+    print(response)
+    return JsonResponse(response)
+
+
 @login_required
 def index(request):
     return render(request, 'main.html', {})
@@ -23,14 +34,13 @@ def index(request):
 def add_estimate(request):
     if request.POST:
         print (request.POST)
-    form = AddEstimate()
-    data_tovar = Product.objects.all()
-    context = {
-        'form': form,
-        'title': 'Добавление сметы',
-        'data_tovar': data_tovar
-    }
-    return render(request, 'estimate/add_estimate.html', context=context)
+    else:
+
+        person = serializers.serialize("json", ObjectsCurrent.objects.all(), fields="name")
+        print(type(person))
+        data = {"data": person}
+        print(person)
+        return render(request, 'estimate/add_estimate.html', context=data)
 
 @login_required
 def smeta(request):

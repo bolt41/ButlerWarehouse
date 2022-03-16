@@ -4,6 +4,7 @@
 Добавление сметы
 {% endblock %}
 {% block script %}
+
 <script src=
 "https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js">
     </script>
@@ -21,7 +22,24 @@
     <div class="cont_center">
 <form action="{% url 'add_estimate' %}" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+
+
+ <select name="datas" id="datas"></select>
+        {{ data }}
+    <script>
+
+        html = "";
+        var data = JSON.parse("{{ data|safe }}");
+        console.log(data);
+        for(var key in obj) {
+            html += "<option value=" + key  + ">" +obj[key] + "</option>"
+        }
+        document.getElementById("datas").innerHTML = html;
+
+    </script>
+
+
+
     <input type="text" id="tags">
     <button type="submit">Добавить</button>
 </form>
@@ -34,9 +52,6 @@
     });
   } );
   </script>
-
-
-
 
     </div>
 </div>

@@ -96,6 +96,14 @@ class Warehouse(models.Model):
     def __str__(self):
         return self.name
 
+    #JSON
+    def get_data(self):
+        return {
+            'id': self.pk,
+            'name': self.name,
+            'address': self.address,
+        }
+
 # Модель поставщиков
 class Provider(models.Model):
     name = models.CharField('Наименование', max_length=200)
@@ -165,6 +173,14 @@ class ObjectsCurrent(models.Model):
     def __str__(self):
         return self.name
 
+    def get_list_objects_json(self):
+        return {
+            'id': self.pk,
+            'name': self.name
+        }
+
+
+
 #Модель статуса смет
 class StatusEstimate(models.Model):
     name = models.CharField('Значение', max_length=100)
@@ -190,6 +206,14 @@ class Estimate(models.Model):
 
     def __str__(self):
         return self.object.name
+
+    def get_estimate_json(self):
+        return {
+            'id': self.pk,
+            'object': self.object.name,
+            'date_doc': self.date_doc,
+            'status_doc': self.status_doc.name,
+        }
 
 #Модель товаров в смете
 class ProductEstimate(models.Model):
